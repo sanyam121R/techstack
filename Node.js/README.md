@@ -1,6 +1,6 @@
 # <div style="display:flex; flex-direction:row; gap:8px; align-items:end;"><img src="https://nodejs.org/static/images/logo.svg" style="height:56px; margin:6px 0 8px 0;"/><span style="margin-bottom:10px; color:#00df53">Questions:</span></div>
 
-### [Beginner Level](#beginner-nodejs-questions) :-
+### [Beginner Level](#beginner-questions) :-
 
 - [What is Node.js and how does it work?](#what-is-nodejs-and-how-does-it-work)
 - [What is the difference between Node.js and traditional server-side languages?](#what-is-the-difference-between-nodejs-and-traditional-server-side-languages)
@@ -13,7 +13,7 @@
 - [What is the difference between synchronous and asynchronous file operations?](#what-is-the-difference-between-synchronous-and-asynchronous-file-operations)
 - [What are streams in Node.js?](#what-are-streams-in-nodejs)
 
-### [Intermediate Level](#intermediate-nodejs-questions) :-
+### [Intermediate Level](#intermediate-questions) :-
 
 - [What is the Event Loop in Node.js and how does it work?](#what-is-the-event-loop-in-nodejs-and-how-does-it-work)
 - [What is the difference between process.nextTick() and setImmediate()?](#what-is-the-difference-between-processnexttick-and-setimmediate)
@@ -28,14 +28,14 @@
 - [How does libuv integrate with Node.js event loop?](#how-does-libuv-integrate-with-nodejs-event-loop)
 - [Explain Express router mounting and param middleware.](#explain-express-router-mounting-and-param-middleware)
 
-### [Advanced Level](#advanced-nodejs-questions) :-
+### [Advanced Level](#advanced-questions) :-
 
 - [What is the difference between V8 engine and Node.js?](#what-is-the-difference-between-v8-engine-and-nodejs)
 - [How do you implement custom streams in Node.js?](#how-do-you-implement-custom-streams-in-nodejs)
 - [What is the difference between worker_threads and child_process?](#what-is-the-difference-between-workerthreads-and-childprocess)
-- [Common security vulns (XSS/CSRF/injection) & mitigations (helmet, sanitize-html, rate-limiter).](#)
-- [Input validation (Joi/Zod schemas) & sanitization.](#)
-- [JWT vs sessions: Implement refresh tokens, blacklist.](#)
+- [Common security vulns (XSS/CSRF/injection) & mitigations (helmet, sanitize-html, rate-limiter).](#common-security-vulns-xsscsrfinjection--mitigations-helmet-sanitize-html-rate-limiter)
+- [Input validation (Joi/Zod schemas) & sanitization.](#input-validation-joizod-schemas--sanitization)
+- [JWT vs sessions: Implement refresh tokens, blacklist.](#jwt-vs-sessions-implement-refresh-tokens-blacklist)
 - [How do you implement caching strategies in Node.js?](#how-do-you-implement-caching-strategies-in-nodejs)
 - [What is the difference between memory leaks and performance issues in Node.js?](#what-is-the-difference-between-memory-leaks-and-performance-issues-in-nodejs)
 - [How do you implement authentication and authorization in Node.js?](#how-do-you-implement-authentication-and-authorization-in-nodejs)
@@ -46,15 +46,14 @@
 
 ## [Senior Level (10+ Years Experience)](#senior-level-10-years-experience-) :-
 ### System Design
-- [Design a rate limiter (fixed window, token bucket).]()
-- [System design: URL shortener (1M writes/sec) or chat app (WebSockets + Redis). Trade-offs?]()
-- [Design Rate Limiter (Fixed Window, Token Bucket)]()
-- [Chat App Trade-offs (URL Covered)]()
+- [System design: URL shortener (1M writes/sec) or chat app (WebSockets + Redis). Trade-offs?](#system-design-url-shortener-1m-writessec-or-chat-app-websockets--redis-trade-offs)
+- [Design Rate Limiter (Fixed Window, Token Bucket)](#design-rate-limiter-fixed-window-token-bucket)
+- [Chat App Trade-offs (URL Covered)](#chat-app-trade-offs-url-covered)
 ---
-- [Scaling: Horizontal (NGINX load balancer + sticky sessions); circuit breakers (Opossum).]()
-- [Microservices: gRPC vs REST; service mesh (Istio).]()
-- [Deployment: PM2 vs Docker Compose; Kubernetes manifests for Node app; blue-green deploys.]()
-- [Security Vulnerabilities & Mitigations ***OWASP** Top 10*]()
+- [Scaling: Horizontal (NGINX load balancer + sticky sessions); circuit breakers (Opossum).](#scaling-horizontal-nginx-load-balancer--sticky-sessions-circuit-breakers-opossum)
+- [Microservices: gRPC vs REST; service mesh (Istio).](#microservices-grpc-vs-rest-service-mesh-istio)
+- [Deployment: PM2 vs Docker Compose; Kubernetes manifests for Node app; blue-green deploys.](#deployment-pm2-vs-docker-compose-kubernetes-manifests-for-node-app-blue-green-deploys)
+- [Security Vulnerabilities & Mitigations ***OWASP** Top 10*](#security-vulnerabilities--mitigations-owasp-top-10)
 
 Other
 - [How do you implement custom Node.js modules and packages?](#how-do-you-implement-custom-nodejs-modules-and-packages)
@@ -67,7 +66,7 @@ Other
 - [What is the difference between Node.js and other JavaScript runtimes?](#what-is-the-difference-between-nodejs-and-other-javascript-runtimes)
 - [What is the future of Node.js and JavaScript runtimes?](#what-is-the-future-of-nodejs-and-javascript-runtimes)
 
-# Beginner Node.js Questions
+# Beginner Questions
 
 ### What is Node.js and how does it work?
 
@@ -490,7 +489,7 @@ fs.createReadStream("input.txt")
 
 ---
 
-# Intermediate Node.js Questions
+# Intermediate Questions
 
 ### What is the Event Loop in Node.js and how does it work?
 
@@ -1089,7 +1088,8 @@ app.use('/api', router); // Mounts /api/users/123
 Trade-offs: Deep nesting hurts perf (use app-level); params skip if no handler matches.
 
 ---
-# Advanced Node.js Questions
+
+# Advanced Questions
 
 ### What is the difference between V8 engine and Node.js?
 
@@ -1258,7 +1258,36 @@ class ThrottleStream extends Transform {
   }
 }
 ```
+---
 
+### Common security vulns (XSS/CSRF/injection) & mitigations (helmet, sanitize-html, rate-limiter).
+**Interview-style answer:**
+
+**Explanation:**
+
+```js
+```
+
+---
+
+### Input validation (Joi/Zod schemas) & sanitization.
+**Interview-style answer:**
+
+**Explanation:**
+
+```js
+```
+
+---
+
+### JWT vs sessions: Implement refresh tokens, blacklist.
+
+**Interview-style answer:**
+
+**Explanation:**
+
+```js
+```
 ---
 
 ### What is the difference between worker_threads and child_process?
@@ -1467,4 +1496,73 @@ function createListener() {
     console.log(data);
   });
   // Never removes listener - memory leak!
+```
+
+# Senior Level Question
+
+### System design: URL shortener (1M writes/sec) or chat app (WebSockets + Redis). Trade-offs?
+
+**Interview-style answer:**
+
+**Explanation:**
+
+```js
+```
+---
+
+### Design Rate Limiter (Fixed Window, Token Bucket)
+
+**Interview-style answer:**
+
+**Explanation:**
+
+```js
+```
+---
+---
+
+### Chat App Trade-offs (URL Covered)
+
+**Interview-style answer:**
+
+**Explanation:**
+
+```js
+```
+---
+
+### Scaling: Horizontal (NGINX load balancer + sticky sessions); circuit breakers (Opossum).
+
+**Interview-style answer:**
+
+**Explanation:**
+
+```js
+```
+
+### Microservices: gRPC vs REST; service mesh (Istio).
+
+**Interview-style answer:**
+
+**Explanation:**
+
+```js
+```
+
+### Deployment: PM2 vs Docker Compose; Kubernetes manifests for Node app; blue-green deploys.
+
+**Interview-style answer:**
+
+**Explanation:**
+
+```js
+```
+
+### Security Vulnerabilities & Mitigations ***OWASP** Top 10*
+
+**Interview-style answer:**
+
+**Explanation:**
+
+```js
 ```
