@@ -1,6 +1,6 @@
 # <div style="display:flex; flex-direction:row; gap:8px; align-items:end;"><img src="https://nodejs.org/static/images/logo.svg" style="height:56px; margin:6px 0 8px 0;"/><span style="margin-bottom:10px; color:#00df53">Questions:</span></div>
 
-### Beginner Level:-
+### [Beginner Level](#beginner-nodejs-questions) :-
 
 - [What is Node.js and how does it work?](#what-is-nodejs-and-how-does-it-work)
 - [What is the difference between Node.js and traditional server-side languages?](#what-is-the-difference-between-nodejs-and-traditional-server-side-languages)
@@ -13,7 +13,7 @@
 - [What is the difference between synchronous and asynchronous file operations?](#what-is-the-difference-between-synchronous-and-asynchronous-file-operations)
 - [What are streams in Node.js?](#what-are-streams-in-nodejs)
 
-### Intermediate Level:-
+### [Intermediate Level](#intermediate-nodejs-questions) :-
 
 - [What is the Event Loop in Node.js and how does it work?](#what-is-the-event-loop-in-nodejs-and-how-does-it-work)
 - [What is the difference between process.nextTick() and setImmediate()?](#what-is-the-difference-between-processnexttick-and-setimmediate)
@@ -25,12 +25,17 @@
 - [How do you handle errors in Node.js applications?](#how-do-you-handle-errors-in-nodejs-applications)
 - [What is the difference between callback, Promise, and async/await in Node.js?](#what-is-the-difference-between-callback-promise-and-asyncawait-in-nodejs)
 - [What are environment variables and how do you use them?](#what-are-environment-variables-and-how-do-you-use-them)
+- [How does libuv integrate with Node.js event loop?](#how-does-libuv-integrate-with-nodejs-event-loop)
+- [Explain Express router mounting and param middleware.](#explain-express-router-mounting-and-param-middleware)
 
-### Advanced Level:-
+### [Advanced Level](#advanced-nodejs-questions) :-
 
 - [What is the difference between V8 engine and Node.js?](#what-is-the-difference-between-v8-engine-and-nodejs)
 - [How do you implement custom streams in Node.js?](#how-do-you-implement-custom-streams-in-nodejs)
 - [What is the difference between worker_threads and child_process?](#what-is-the-difference-between-workerthreads-and-childprocess)
+- [Common security vulns (XSS/CSRF/injection) & mitigations (helmet, sanitize-html, rate-limiter).](#)
+- [Input validation (Joi/Zod schemas) & sanitization.](#)
+- [JWT vs sessions: Implement refresh tokens, blacklist.](#)
 - [How do you implement caching strategies in Node.js?](#how-do-you-implement-caching-strategies-in-nodejs)
 - [What is the difference between memory leaks and performance issues in Node.js?](#what-is-the-difference-between-memory-leaks-and-performance-issues-in-nodejs)
 - [How do you implement authentication and authorization in Node.js?](#how-do-you-implement-authentication-and-authorization-in-nodejs)
@@ -39,17 +44,27 @@
 - [What is the difference between horizontal and vertical scaling in Node.js?](#what-is-the-difference-between-horizontal-and-vertical-scaling-in-nodejs)
 - [How do you implement logging and monitoring in Node.js applications?](#how-do-you-implement-logging-and-monitoring-in-nodejs-applications)
 
-### Senior Level (10+ Years Experience):-
+## [Senior Level (10+ Years Experience)](#senior-level-10-years-experience-) :-
+### System Design
+- [Design a rate limiter (fixed window, token bucket).]()
+- [System design: URL shortener (1M writes/sec) or chat app (WebSockets + Redis). Trade-offs?]()
+- [Design Rate Limiter (Fixed Window, Token Bucket)]()
+- [Chat App Trade-offs (URL Covered)]()
+---
+- [Scaling: Horizontal (NGINX load balancer + sticky sessions); circuit breakers (Opossum).]()
+- [Microservices: gRPC vs REST; service mesh (Istio).]()
+- [Deployment: PM2 vs Docker Compose; Kubernetes manifests for Node app; blue-green deploys.]()
+- [Security Vulnerabilities & Mitigations ***OWASP** Top 10*]()
 
+Other
 - [How do you implement custom Node.js modules and packages?](#how-do-you-implement-custom-nodejs-modules-and-packages)
 - [What is the difference between native modules and JavaScript modules in Node.js?](#what-is-the-difference-between-native-modules-and-javascript-modules-in-nodejs)
 - [How do you implement custom protocols and network layers in Node.js?](#how-do-you-implement-custom-protocols-and-network-layers-in-nodejs)
-- [What is the difference between Node.js and Deno?](#what-is-the-difference-between-nodejs-and-deno)
 - [How do you implement custom build tools and transpilers for Node.js?](#how-do-you-implement-custom-build-tools-and-transpilers-for-nodejs)
-- [What is the difference between Node.js and Bun?](#what-is-the-difference-between-nodejs-and-bun)
 - [How do you implement custom debugging and profiling tools for Node.js?](#how-do-you-implement-custom-debugging-and-profiling-tools-for-nodejs)
+- [What is the difference between Node.js and Deno?](#what-is-the-difference-between-nodejs-and-deno)
+- [What is the difference between Node.js and Bun?](#what-is-the-difference-between-nodejs-and-bun)
 - [What is the difference between Node.js and other JavaScript runtimes?](#what-is-the-difference-between-nodejs-and-other-javascript-runtimes)
-- [How do you implement custom Node.js engines and interpreters?](#how-do-you-implement-custom-nodejs-engines-and-interpreters)
 - [What is the future of Node.js and JavaScript runtimes?](#what-is-the-future-of-nodejs-and-javascript-runtimes)
 
 # Beginner Node.js Questions
@@ -1027,6 +1042,53 @@ if (!process.env.JWT_SECRET) {
 
 ---
 
+### How does libuv integrate with Node.js event loop?
+
+**Interview-style answer:**
+libuv is Node's C library handling non-blocking I/O (threads pool for DNS/FS), feeding completed callbacks to V8's event loop phases (timers→poll→check); Node bindings (fs/http) call libuv, which signals libuv loop→Node loop via epoll/kqueue.
+
+**Explanation:**
+
+```js
+// libuv under Node: fs.readFile → libuv thread pool → callback to poll phase
+const fs = require('fs'); // fs.promises uses libuv
+fs.readFile('file.txt', (err, data) => {
+  // Runs in poll phase after libuv completes I/O
+});
+setImmediate(() => console.log('check phase')); // After poll
+// libuv loop runs in background thread; Node loop (JS thread) polls it
+```
+
+Trade-offs: libuv defaults 4 FS threads (UV_THREADPOOL_SIZE=128 for heavy I/O); blocks on CPU tasks.
+
+---
+
+### Explain Express router mounting and param middleware.
+
+**Interview-style answer:**
+Router mounting nests sub-apps (app.use('/api', router)) for modularity; param middleware runs on :id params via router.param('id', fn) before route handlers, e.g., fetch user by ID.
+
+**Explanation:**
+```js
+const express = require('express');
+const app = express();
+const router = express.Router();
+
+// Param middleware
+router.param('id', async (req, res, next, id) => {
+  req.user = await db.findUser(id); // Runs before routes with :id
+  if (!req.user) return res.status(404).send('User not found');
+  next();
+});
+
+// Mounting
+router.get('/users/:id', (req, res) => res.json(req.user)); // param runs first
+router.post('/users/:id/orders', (req, res) => { /* order for req.user */ });
+app.use('/api', router); // Mounts /api/users/123
+```
+Trade-offs: Deep nesting hurts perf (use app-level); params skip if no handler matches.
+
+---
 # Advanced Node.js Questions
 
 ### What is the difference between V8 engine and Node.js?
