@@ -30,6 +30,8 @@
 
 ### [Advanced Level](#advanced-questions) :-
 
+- [How do you structure a mid-sized backend service in Node/TypeScript so that it stays maintainable as it grows]()
+- [How would you profile and optimize an API that suddenly became slow under load?]()
 - [What is the difference between V8 engine and Node.js?](#what-is-the-difference-between-v8-engine-and-nodejs)
 - [How do you implement custom streams in Node.js?](#how-do-you-implement-custom-streams-in-nodejs)
 - [What is the difference between worker_threads and child_process?](#what-is-the-difference-between-workerthreads-and-childprocess)
@@ -43,6 +45,7 @@
 - [How do you implement real-time communication in Node.js?](#how-do-you-implement-real-time-communication-in-nodejs)
 - [What is the difference between horizontal and vertical scaling in Node.js?](#what-is-the-difference-between-horizontal-and-vertical-scaling-in-nodejs)
 - [How do you implement logging and monitoring in Node.js applications?](#how-do-you-implement-logging-and-monitoring-in-nodejs-applications)
+- [Show me how you’d design error handling for an API that talks to MongoDB and two external services.]()
 
 ## [Senior Level (10+ Years Experience)](#senior-level-10-years-experience-) :-
 ### System Design
@@ -1090,6 +1093,18 @@ Trade-offs: Deep nesting hurts perf (use app-level); params skip if no handler m
 ---
 
 # Advanced Questions
+
+### How do you structure a mid-sized backend service in Node/TypeScript so that it stays maintainable as it grows
+
+**Interview-style answer:**
+- Layered structure: controllers, services, repositories, shared utilities, DTOs.
+- Separation of concerns: no DB logic in controllers, clear boundaries.
+- Error handling pattern (central error middleware or filters), standardized response format.
+- Configuration management (env, config module), logging abstraction.
+
+Trade-offs:
+- Show me how you would organize a feature like ‘Call Transcript Search’ in modules/files.
+- How do you keep types consistent between layers?
 
 ### What is the difference between V8 engine and Node.js?
 
